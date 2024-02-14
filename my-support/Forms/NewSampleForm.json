@@ -1,0 +1,68 @@
+{
+    "Form":{
+        "Text":"Sample form", "Width":900, "Height":600
+    },
+    "Elements":[
+        {
+            "Name":"label_ContactsHeading",
+            "Type":"Label", "Text":"Contacts", "x":0, "y":10,
+            "FontStyle":"Bold"
+        },
+        {
+            "Name":"label_Name",
+            "Type":"Label", "Text":"Name:", "x":0, "y":40
+        },
+        {
+            "Name":"textBox_Name",
+            "Type":"TextBox", "Size-x":150, "Size-y":23, "x":50, "y":40
+        },
+        {
+            "Name":"label_Company",
+            "Type":"Label", "Text":"Company:", "x":230, "y":40
+        },
+        {
+            "Name":"combo_Company", "SelectedIndex":"0",
+            "Type":"ComboBox", "Width":100, "x":310, "y":40, "Items":["Apple","Amazon","Google","Microsoft","Twitter"]
+        },
+        {
+            "Name":"label_Phone",
+            "Type":"Label", "Text":"Ph:", "x":440, "y":40
+        },
+        {
+            "Name":"textBox_Phone",
+            "Type":"TextBox", "Size-x":100, "Size-y":23, "x":470, "y":40
+        },
+        {
+            "Name":"button_update",
+            "Type":"Button", "Text":"Update", "Size-x":80, "Size-y":23, "x":580, "y":40
+        },
+        {
+            "Name":"button_save_new",
+            "Type":"Button", "Text":"Save New", "Size-x":80, "Size-y":23, "x":670, "y":40
+        },
+        {
+            "Name":"button_remove",
+            "Type":"Button", "Text":"Remove", "Size-x":80, "Size-y":23, "x":760, "y":40
+        },
+        {
+            "Name":"list_Contacts",
+            "Type":"ListBox", "Width":520, "Height":200,"x":50, "y":80
+        },
+        {
+            "Name":"label_OtherHeading",
+            "Type":"Label", "Text":"Other", "x":0, "y":300,
+            "FontStyle":"Bold"
+        },
+        {
+            "Name":"combo_Trams", "SelectedIndex":"0",
+            "Type":"ComboBox", "Width":300, "x":10, "y":330, "Items":[
+                "1649 | Tram 72 to City, Belmomt St Glen Iris",
+                "3013 | Tram 72 to Camberwell, Flinders St Station"
+            ]
+        },
+        {
+            "Name":"button_Tram",
+            "Type":"Button", "Text":"Next 3 Trams", "Size-x":120, "Size-y":23, "x":320, "y":330
+        }
+    ]
+}
