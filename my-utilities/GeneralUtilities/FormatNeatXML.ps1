@@ -1,3 +1,4 @@
+#Mostly based from https://stackoverflow.com/questions/39267485/formatting-xml-from-powershell
 Function Format-NeatXML {
     [CmdletBinding()]
     param (
