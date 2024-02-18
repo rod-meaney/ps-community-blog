@@ -1,0 +1,78 @@
+{
+    "Form":{
+        "Text":"Tabbed form", "Width":400, "Height":300
+    },
+    "Tabs":[{
+        "Name": "tab_Sample",
+        "Text": "Sample APIs",
+        "Elements":[
+            {
+                "Name":"label_SampleMainHeading",
+                "Type":"Label", "Text":"Things to try", "x":10, "y":10,
+                "FontStyle":"Bold"
+            },
+            {
+                "Name":"combo_SampleTrams", "SelectedIndex":"0",
+                "Type":"ComboBox", "Width":300, "x":10, "y":40, "Items":[
+                    "1649 | Tram 72 to City, Belmomt St Glen Iris",
+                    "3013 | Tram 72 to Camberwell, Flinders St Station"
+                ]
+            },
+            {
+                "Name":"button_SampleTram",
+                "Type":"Button", "Text":"Next 3 Trams", "Size-x":120, "Size-y":23, "x":10, "y":70
+            },
+            {
+                "Name":"button_SampleNextTram",
+                "Type":"Button", "Text":"Next Trams", "Size-x":120, "Size-y":23, "x":140, "y":70
+            },
+            {
+                "Name":"label_SampleRandomCatHeading",
+                "Type":"Label", "Text":"Random Cat facts", "x":10, "y":110,
+                "FontStyle":"Bold"
+            },
+            {
+                "Name":"button_SampleRandomCatFacts",
+                "Type":"Button", "Text":"Random Cat Fact", "Size-x":120, "Size-y":23, "x":10, "y":140
+            },
+            {
+                "Name":"label_SampleNameAgeHeading",
+                "Type":"Label", "Text":"Age based on name", "x":10, "y":180,
+                "FontStyle":"Bold"
+            },
+            {
+                "Name":"textBox_SampleNameAge",
+                "Type":"TextBox", "Size-x":150, "Size-y":23, "x":10, "y":210
+            },
+            {
+                "Name":"button_SampleNameAge",
+                "Type":"Button", "Text":"Age based on name", "Size-x":140, "Size-y":23, "x":180, "y":210
+            }
+        ]
+    },
+    {
+        "Name": "tab_Game",
+        "Text": "Games",
+        "Elements":[
+            {
+                "Name":"label_GameHeading",
+                "Type":"Label", "Text":"Guessing game", "x":10, "y":10,
+                "FontStyle":"Bold"
+            },
+            {
+                "Name":"combo_GameNumber", "SelectedIndex":"0",
+                "Type":"ComboBox", "Width":50, "x":10, "y":40, "Items":[
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5"
+                ]
+            },
+            {
+                "Name":"button_GameGuess",
+                "Type":"Button", "Text":"Guess number between 1 an 5", "Size-x":200, "Size-y":23, "x":70, "y":40
+            }            
+        ]
+    }]
+}
