@@ -138,8 +138,9 @@ function Set-ListViewElementsFromData {
     [CmdletBinding()]
     param (
 		[Parameter(Mandatory=$true)] [System.Windows.Forms.ListView]$ListView,
-        [Parameter(Mandatory=$true, HelpMessage="Data can be an csv that has been imported, or a result set from SQL")] $Data
+        [Parameter(Mandatory=$true, HelpMessage="Data can be a csv that has been imported, a result set from SQL, or PSCustomObject")] $Data
     )
+    $ListView.Items.Clear()
     foreach($row in $Data){
         $ColName = $ListView.Columns[0].Text
         $item1 = [System.Windows.Forms.ListViewItem]::new(($row."$ColName"),0)
