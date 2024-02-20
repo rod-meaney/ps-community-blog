@@ -36,7 +36,7 @@ param (
         $keys = @{}
     }
     if ($keys.ContainsKey($Key)){
-        $keys[$Key] = $Value
+        $keys[$Key] = (Protect-WithMachineKey $Value)
     } else {
         $keys.Add($Key, (Protect-WithMachineKey $Value))
     }
@@ -59,3 +59,21 @@ function Get-SecureKeyFromLocalStore{
     } else {throw "$StoreFileName does not exist"}
 }
 Export-ModuleMember -Function Get-SecureKeyFromLocalStore
+
+function Remove-SecureKeyFromLocalStore{
+    [CmdletBinding()]
+    param (
+        [Parameter(Mandatory=$true)] [string]$Key,
+        [Parameter(Mandatory=$true, HelpMessage="Full filename, unless using switch to make relative to MyDocuments")] [String]$StoreFileName,
+        [Parameter(Mandatory=$false)] [Switch]$UseMyDocuments
+    ) 
+    if ($UseMyDocuments){$StoreFileName = Join-Path ([Environment]::GetFolderPath("MyDocuments")) $StoreFileName}
+    if (Test-Path $StoreFileName){
+        $keys = Get-Content $StoreFileName -Raw | ConvertFrom-Json  | ConvertTo-HashtableV5
+        If($keys.ContainsKey($key)) {
+            $keys.Remove($Key)
+            $keys | ConvertTo-Json | Set-Content $StoreFileName -Force
+        } else {throw "$StoreFileName does not contain $key"}
+    } else {throw "Keystore '$StoreFileName' does not exist"}
+}
+Export-ModuleMember -Function Remove-SecureKeyFromLocalStore

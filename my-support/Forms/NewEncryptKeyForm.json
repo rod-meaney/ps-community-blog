@@ -1,0 +1,47 @@
+{
+    "Form":{
+        "Text":"Secure Key Vault", "Width":610, "Height":450
+    },
+    "Elements":[
+        {
+            "Name":"label_SecureKeyHeading",
+            "Type":"Label", "Text":"Keys", "x":10, "y":10,
+            "FontStyle":"Bold"
+        },
+        {
+            "Name":"list_SecureKeyKeyList",
+            "Type":"ListView", "Width":200, "Height":300,"x":10, "y":40,
+            "Item":"Key",
+            "SubItems":["EncryptedData"]
+        },
+        {
+            "Name":"label_SecureKeyAdd",
+            "Type":"Label", "Text":"Add / Update", "x":230, "y":40,
+            "FontStyle":"Bold"
+        },
+        {
+            "Name":"label_SecureKeyNewKey",
+            "Type":"Label", "Text":"Key", "x":230, "y":70
+        },
+        {
+            "Name":"textBox_SecureKeyNewKey",
+            "Type":"TextBox", "Size-x":250, "Size-y":23, "x":230, "y":100
+        },
+        {
+            "Name":"label_SecureKeyNewValue",
+            "Type":"Label", "Text":"Value", "x":230, "y":130
+        },
+        {
+            "Name":"textBox_SecureKeyNewKeyValue",
+            "Type":"TextBox", "Size-x":250, "Size-y":23, "x":230, "y":160
+        },
+        {
+            "Name":"button_SecureKeyAdd",
+            "Type":"Button", "Text":"Add / Update", "Size-x":120, "Size-y":23, "x":230, "y":190
+        },
+        {
+            "Name":"button_SecureKeyRemove",
+            "Type":"Button", "Text":"Remove", "Size-x":120, "Size-y":23, "x":360, "y":190
+        }
+    ]
+}
