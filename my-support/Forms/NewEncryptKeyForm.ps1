@@ -20,7 +20,7 @@ function New-EncryptKeyForm {
     $FormElements.list_SecureKeyKeyList.Add_ItemSelectionChanged({
       $data = New-LineDataFromListViewItem $_.Item #gives you access to known columns in csv
       if($_.IsSelected){
-        $UnEncryptedValue = Unprotect-WithMachineKey ($data."EncryptedData")
+        $UnEncryptedValue = Unprotect-WithMachineAndUserKey ($data."EncryptedData")
         $FormElements.textBox_SecureKeyNewKey.Text = $data."Key"
         $FormElements.textBox_SecureKeyNewKeyValue.Text = $UnEncryptedValue
       }
