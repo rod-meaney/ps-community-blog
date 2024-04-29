@@ -11,13 +11,13 @@ Function Protect-WithMachineAndUserKey([Parameter(Mandatory=$true)] $secret) {
 }
 Export-ModuleMember -Function Protect-WithMachineAndUserKey
 
-Function Unprotect-WithMachineAndUserKey([Parameter(Mandatory=$true)] $secret) {
+Function Unprotect-WithMachineAndUserKey([Parameter(Mandatory=$true)] $enc_secret) {
     Add-Type -AssemblyName System.Security
-    $SecureStr = [System.Convert]::FromBase64String($secret)
+    $SecureStr = [System.Convert]::FromBase64String($enc_secret)
     $bytes = [Security.Cryptography.ProtectedData]::Unprotect($SecureStr, $null, [Security.Cryptography.DataProtectionScope]::CurrentUser)
     $bytes = [Security.Cryptography.ProtectedData]::Unprotect($bytes, $null, [Security.Cryptography.DataProtectionScope]::LocalMachine)
-    $Password = [System.Text.Encoding]::Unicode.GetString($bytes)
-    return $Password
+    $secret = [System.Text.Encoding]::Unicode.GetString($bytes)
+    return $secret
 }
 Export-ModuleMember -Function Unprotect-WithMachineAndUserKey
 # END From https://stackoverflow.com/questions/46400234/encrypt-string-with-the-machine-key-in-powershell
@@ -31,12 +31,12 @@ Function Protect-WithUserKey([Parameter(Mandatory=$true)] $secret) {
 }
 Export-ModuleMember -Function Protect-WithUserKey
 
-Function Unprotect-WithUserKey([Parameter(Mandatory=$true)] $secret) {
+Function Unprotect-WithUserKey([Parameter(Mandatory=$true)] $enc_secret) {
     Add-Type -AssemblyName System.Security
-    $SecureStr = [System.Convert]::FromBase64String($secret)
+    $SecureStr = [System.Convert]::FromBase64String($enc_secret)
     $bytes = [Security.Cryptography.ProtectedData]::Unprotect($SecureStr, $null, [Security.Cryptography.DataProtectionScope]::CurrentUser)
-    $Password = [System.Text.Encoding]::Unicode.GetString($bytes)
-    return $Password
+    $secret = [System.Text.Encoding]::Unicode.GetString($bytes)
+    return $secret
 }
 Export-ModuleMember -Function Unprotect-WithUserKey
 
