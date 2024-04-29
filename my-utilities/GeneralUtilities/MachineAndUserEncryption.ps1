@@ -1,9 +1,9 @@
 # START From https://stackoverflow.com/questions/46400234/encrypt-string-with-the-machine-key-in-powershell
 # Added proper naming converntions and encrypted with User and Machine
-Function Protect-WithMachineAndUserKey($s) {
+Function Protect-WithMachineAndUserKey([Parameter(Mandatory=$true)] $secret) {
     Add-Type -AssemblyName System.Security
 
-    $bytes = [System.Text.Encoding]::Unicode.GetBytes($s)
+    $bytes = [System.Text.Encoding]::Unicode.GetBytes($secret)
     $SecureStr = [Security.Cryptography.ProtectedData]::Protect($bytes, $null, [Security.Cryptography.DataProtectionScope]::LocalMachine)
     $SecureStr = [Security.Cryptography.ProtectedData]::Protect($SecureStr, $null, [Security.Cryptography.DataProtectionScope]::CurrentUser)
     $SecureStrBase64 = [System.Convert]::ToBase64String($SecureStr)
@@ -11,9 +11,9 @@ Function Protect-WithMachineAndUserKey($s) {
 }
 Export-ModuleMember -Function Protect-WithMachineAndUserKey
 
-Function Unprotect-WithMachineAndUserKey($s) {
+Function Unprotect-WithMachineAndUserKey([Parameter(Mandatory=$true)] $secret) {
     Add-Type -AssemblyName System.Security
-    $SecureStr = [System.Convert]::FromBase64String($s)
+    $SecureStr = [System.Convert]::FromBase64String($secret)
     $bytes = [Security.Cryptography.ProtectedData]::Unprotect($SecureStr, $null, [Security.Cryptography.DataProtectionScope]::CurrentUser)
     $bytes = [Security.Cryptography.ProtectedData]::Unprotect($bytes, $null, [Security.Cryptography.DataProtectionScope]::LocalMachine)
     $Password = [System.Text.Encoding]::Unicode.GetString($bytes)
@@ -22,18 +22,18 @@ Function Unprotect-WithMachineAndUserKey($s) {
 Export-ModuleMember -Function Unprotect-WithMachineAndUserKey
 # END From https://stackoverflow.com/questions/46400234/encrypt-string-with-the-machine-key-in-powershell
 
-Function Protect-WithUserKey($s) {
+Function Protect-WithUserKey([Parameter(Mandatory=$true)] $secret) {
     Add-Type -AssemblyName System.Security
-    $bytes = [System.Text.Encoding]::Unicode.GetBytes($s)
+    $bytes = [System.Text.Encoding]::Unicode.GetBytes($secret)
     $SecureStr = [Security.Cryptography.ProtectedData]::Protect($bytes, $null, [Security.Cryptography.DataProtectionScope]::CurrentUser)
     $SecureStrBase64 = [System.Convert]::ToBase64String($SecureStr)
     return $SecureStrBase64
 }
 Export-ModuleMember -Function Protect-WithUserKey
 
-Function Unprotect-WithUserKey($s) {
+Function Unprotect-WithUserKey([Parameter(Mandatory=$true)] $secret) {
     Add-Type -AssemblyName System.Security
-    $SecureStr = [System.Convert]::FromBase64String($s)
+    $SecureStr = [System.Convert]::FromBase64String($secret)
     $bytes = [Security.Cryptography.ProtectedData]::Unprotect($SecureStr, $null, [Security.Cryptography.DataProtectionScope]::CurrentUser)
     $Password = [System.Text.Encoding]::Unicode.GetString($bytes)
     return $Password
