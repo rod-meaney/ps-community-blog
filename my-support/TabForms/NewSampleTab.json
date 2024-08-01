@@ -1,0 +1,52 @@
+{
+    "Tab":{
+        "Text":"Sample form", 
+        "Width":400, 
+        "Height":300,
+        "name":"SampleTab"
+    },
+    "Elements":[
+        {
+            "Name":"label_MainHeading",
+            "Type":"Label", "Text":"Things to try", "x":10, "y":10,
+            "FontStyle":"Bold"
+        },
+        {
+            "Name":"combo_Trams", "SelectedIndex":"0",
+            "Type":"ComboBox", "Width":300, "x":10, "y":40, "Items":[
+                "1649 | Tram 72 to City, Belmomt St Glen Iris",
+                "3013 | Tram 72 to Camberwell, Flinders St Station"
+            ]
+        },
+        {
+            "Name":"button_Tram",
+            "Type":"Button", "Text":"Next 3 Trams", "Size-x":120, "Size-y":23, "x":10, "y":70
+        },
+        {
+            "Name":"button_NextTram",
+            "Type":"Button", "Text":"Next Trams", "Size-x":120, "Size-y":23, "x":140, "y":70
+        },
+        {
+            "Name":"label_RandomCatHeading",
+            "Type":"Label", "Text":"Random Cat facts", "x":10, "y":110,
+            "FontStyle":"Bold"
+        },
+        {
+            "Name":"button_RandomCatFacts",
+            "Type":"Button", "Text":"Random Cat Fact", "Size-x":120, "Size-y":23, "x":10, "y":140
+        },
+        {
+            "Name":"label_NameAgeHeading",
+            "Type":"Label", "Text":"Age based on name", "x":10, "y":180,
+            "FontStyle":"Bold"
+        },
+        {
+            "Name":"textBox_NameAge",
+            "Type":"TextBox", "Size-x":150, "Size-y":23, "x":10, "y":210
+        },
+        {
+            "Name":"button_NameAge",
+            "Type":"Button", "Text":"Age based on name", "Size-x":140, "Size-y":23, "x":180, "y":210
+        }
+    ]
+}

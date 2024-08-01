@@ -1,0 +1,13 @@
+{
+    "Form":{
+        "Text":"Sample form", 
+        "Width":400, 
+        "Height":300,
+        "TabControl":{
+            "Width":400, 
+            "Height":300,
+            "location":"0,0"
+        }
+    },
+    "Elements":[]
+}

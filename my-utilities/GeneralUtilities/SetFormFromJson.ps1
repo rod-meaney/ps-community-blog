@@ -28,11 +28,13 @@ function Set-FormFromJson {
             $Tab1.Name = $tab.Name
             $Tab1.Text = $tab.Text
             $FormElements.Add($tab.Name, @{})
-            Set-FormElementsFromJson -FormOrTab $Tab1 -FormOrTabHash $FormElements[$tab.Name] -Elements $tab.Elements    
+            #Set-FormElementsFromJson -FormOrTab $Tab1 -FormOrTabHash $FormElements[$tab.Name] -Elements $tab.Elements    
+            Set-ElementsFromJson -Form $Tab1 -FormHash $FormElements[$tab.Name] -Elements $tab.Elements    
             $FormTabControl.Controls.Add($Tab1)
         }
     } else {
-        Set-FormElementsFromJson -FormOrTab $main_form -FormOrTabHash $FormElements -Elements $config.Elements
+        #Set-FormElementsFromJson -FormOrTab $main_form -FormOrTabHash $FormElements -Elements $config.Elements
+        Set-ElementsFromJson -Form $main_form -FormHash $FormElements -Elements $config.Elements
     }
     return $main_form, $FormElements
 }

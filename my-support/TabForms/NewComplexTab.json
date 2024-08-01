@@ -1,0 +1,30 @@
+{
+    "tab":{
+        "Text":"Complex", "Width":400, "Height":300,"name":"ComplexTab"
+    },
+    "Elements":[
+        {
+            "Name":"label_Heading",
+            "Type":"Label", "Text":"Names", "x":10, "y":10,
+            "FontStyle":"Bold"
+        },
+        {
+            "Name":"list_Names",
+            "Type":"ListView", "Width":300, "Height":100,"x":10, "y":40,
+            "Item":"Name",
+            "SubItems":["Age","Count"]
+        },
+        {
+            "Name":"textBox_Name",
+            "Type":"TextBox", "Size-x":150, "Size-y":23, "x":10, "y":150
+        },
+        {
+            "Name":"button_CheckName",
+            "Type":"Button", "Text":"Check Name", "Size-x":100, "Size-y":23, "x":170, "y":150
+        },
+        {
+            "Name":"button_RemoveLine",
+            "Type":"Button", "Text":"Remove Line", "Size-x":100, "Size-y":23, "x":280, "y":150
+        }
+    ]
+}

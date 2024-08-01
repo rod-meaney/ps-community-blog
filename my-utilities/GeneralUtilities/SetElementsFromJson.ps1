@@ -1,8 +1,8 @@
-function Set-FormElementsFromJson {
+function Set-ElementsFromJson {
     [CmdletBinding()]
     param (
-		[Parameter(Mandatory=$true)] $FormOrTab,
-        [Parameter(Mandatory=$true)] $FormOrTabHash,
+		[Parameter(Mandatory=$true)] $Form, 
+        [Parameter(Mandatory=$true)] $FormHash,
         [Parameter(Mandatory=$true)] $Elements
     )
     $FontSize = 9
@@ -24,8 +24,8 @@ function Set-FormElementsFromJson {
                 $Label.Location     = New-Object System.Drawing.Point($el.x,$el.y)
                 $Label.AutoSize     = $true
                 $Label.Font         = $FontStyle
-                $FormOrTabHash.Add($el.Name, $Label)
-                $FormOrTab.Controls.Add($Label)
+                $FormHash.Add($el.Name, $Label)
+                $Form.Controls.Add($Label)
             }
             "LinkLabel" {
                 #Note, you need to do Add-Click with the URL in the Form iteself
@@ -36,8 +36,8 @@ function Set-FormElementsFromJson {
                 $LinkLabel.Font             = $FontStyle
                 $LinkLabel.LinkColor        = "BLUE"
                 $LinkLabel.ActiveLinkColor  = "RED"
-                $FormOrTabHash.Add($el.Name, $LinkLabel)
-                $FormOrTab.Controls.Add($LinkLabel)
+                $FormHash.Add($el.Name, $LinkLabel)
+                $Form.Controls.Add($LinkLabel)
             }            
             "ComboBox" {
                 $ComboBox           = New-Object System.Windows.Forms.ComboBox
@@ -51,8 +51,8 @@ function Set-FormElementsFromJson {
                 #Items is optional, add lookup in ~Form.ps1
                 if($el.Items) {$el.Items | ForEach-Object {[void] $ComboBox.Items.Add($_)}}
                 if($el.SelectedIndex){$ComboBox.SelectedIndex = [int]$el.SelectedIndex}
-                $FormOrTabHash.Add($el.Name, $ComboBox)
-                $FormOrTab.Controls.Add($ComboBox)
+                $FormHash.Add($el.Name, $ComboBox)
+                $Form.Controls.Add($ComboBox)
             }
             "Button" {
                 $Button             = New-Object System.Windows.Forms.Button
@@ -60,8 +60,8 @@ function Set-FormElementsFromJson {
                 $Button.Location    = New-Object System.Drawing.Size($el.x,$el.y)
                 $Button.Size        = New-Object System.Drawing.Size($el['Size-x'],$el['Size-y'])
                 $Button.Font        = $FontStyle
-                $FormOrTabHash.Add($el.Name, $Button)
-                $FormOrTab.Controls.Add($Button)
+                $FormHash.Add($el.Name, $Button)
+                $Form.Controls.Add($Button)
             }
             "ListView" {
                 #https://info.sapien.com/index.php/guis/gui-controls/spotlight-on-the-listview-control
@@ -80,8 +80,8 @@ function Set-FormElementsFromJson {
                   $ListView.Columns.Add($col, -2, [System.Windows.Forms.HorizontalAlignment]::Left) | Out-Null
                 }
 
-                $FormOrTabHash.Add($el.Name, $ListView)
-                $FormOrTab.Controls.Add($ListView)
+                $FormHash.Add($el.Name, $ListView)
+                $Form.Controls.Add($ListView)
             }
             "ListBox" {
                 $listBox            = New-Object System.Windows.Forms.ListBox
@@ -91,8 +91,8 @@ function Set-FormElementsFromJson {
                 $listBox.Font       = New-Object System.Drawing.Font("Courier New",$FontSize,[System.Drawing.FontStyle]::Regular)
                 if($el.SelectionMode) {$listBox.SelectionMode = "$($el.SelectionMode)"}
                 if($el.Items) {$el.Items | ForEach-Object {[void] $listBox.Items.Add($_)}} 
-                $FormOrTabHash.Add($el.Name, $listBox)
-                $FormOrTab.Controls.Add($listBox)
+                $FormHash.Add($el.Name, $listBox)
+                $Form.Controls.Add($listBox)
                 
             }
             "TextBox" {
@@ -103,8 +103,8 @@ function Set-FormElementsFromJson {
                 if($el.Multiline) {$textBox.Multiline = $el.Multiline}
                 if($el.PasswordChar) {$textBox.PasswordChar = $el.PasswordChar}
                 if($el.DefaultText){$textBox.Text = $el.DefaultText}
-                $FormOrTabHash.Add($el.Name, $textBox)
-                $FormOrTab.Controls.Add($textBox)
+                $FormHash.Add($el.Name, $textBox)
+                $Form.Controls.Add($textBox)
             }
             "CheckBox" {
                 $checkBox           = New-Object System.Windows.Forms.CheckBox
@@ -113,16 +113,16 @@ function Set-FormElementsFromJson {
                 $checkBox.Text      = $el.Text
                 $checkBox.Font      = $FontStyle 
                 if($el.Checked) {$checkBox.Checked = $el.Checked} else {$checkBox.Checked = $false}
-                $FormOrTabHash.Add($el.Name, $checkBox)
-                $FormOrTab.Controls.Add($checkBox)
+                $FormHash.Add($el.Name, $checkBox)
+                $Form.Controls.Add($checkBox)
             }
             "Calendar" {
                 $Cal                    = New-Object System.Windows.Forms.MonthCalendar
                 $Cal.Location           = New-Object System.Drawing.Size($el.x,$el.y)
                 $Cal.ShowTodayCircle    = $true
                 $Cal.MaxSelectionCount  = 1
-                $FormOrTabHash.Add($el.Name, $Cal)
-                $FormOrTab.Controls.Add($Cal)
+                $FormHash.Add($el.Name, $Cal)
+                $Form.Controls.Add($Cal)
             }
             Default {
                 throw "$($el.Type) is not handled by form code - check your json"
@@ -130,39 +130,4 @@ function Set-FormElementsFromJson {
         }
     }
 }
-Export-ModuleMember -Function Set-FormElementsFromJson
-
-# ============== LISTVIEW Helpers ==============
-function Set-ListViewElementsFromData {
-    #BEST to make SQL Result or imported CSV as string-like as possible. i.e. do string conversions in SQL or creation of your csv
-    [CmdletBinding()]
-    param (
-		[Parameter(Mandatory=$true)] [System.Windows.Forms.ListView]$ListView,
-        [Parameter(Mandatory=$true, HelpMessage="Data can be a csv that has been imported, a result set from SQL, or PSCustomObject")] $Data
-    )
-    $ListView.Items.Clear()
-    foreach($row in $Data){
-        $ColName = $ListView.Columns[0].Text
-        $item1 = [System.Windows.Forms.ListViewItem]::new(($row."$ColName"),0)
-        for($i=1;$i -lt $ListView.Columns.count;$i++){
-          $ColName = $ListView.Columns[$i].Text
-          $item1.SubItems.Add([string]$row."$ColName") | Out-Null 
-        }
-        $ListView.Items.Add($item1) | Out-Null
-      }
-}
-Export-ModuleMember -Function Set-ListViewElementsFromData
-function New-LineDataFromListViewItem {
-    [CmdletBinding()]
-    param (
-		[Parameter(Mandatory=$true)] $item
-    )
-    $data = @{}
-    $i=0
-    foreach($col in $item.ListView.Columns){
-        $data.Add($col.Text,$item.SubItems[$i].Text)
-        $i++
-    }
-    return $data
-}
-Export-ModuleMember -Function New-LineDataFromListViewItem
+Export-ModuleMember -Function Set-ElementsFromJson
