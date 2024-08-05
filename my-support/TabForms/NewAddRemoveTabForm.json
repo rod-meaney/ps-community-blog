@@ -1,0 +1,26 @@
+{
+    "Form":{
+        "Text":"Add and remove tabs!", 
+        "Width":400, 
+        "Height":350,
+        "TabControl":{
+            "Width":400, 
+            "Height":300,
+            "location":"0,50"
+        }
+    },
+    "Elements":[
+        {
+            "Name":"button_add_complex",
+            "Type":"Button", "Text":"Add Complex", "Size-x":100, "Size-y":23, "x":10, "y":10
+        },
+        {
+            "Name":"button_add_sample",
+            "Type":"Button", "Text":"Add sample", "Size-x":100, "Size-y":23, "x":130, "y":10
+        },
+        {
+            "Name":"button_clear",
+            "Type":"Button", "Text":"Clear", "Size-x":100, "Size-y":23, "x":260, "y":10
+        }        
+    ]
+}

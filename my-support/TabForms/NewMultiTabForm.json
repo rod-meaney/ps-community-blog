@@ -1,6 +1,6 @@
 {
     "Form":{
-        "Text":"Sample form", 
+        "Text":"Multi-tabs", 
         "Width":400, 
         "Height":300,
         "TabControl":{
